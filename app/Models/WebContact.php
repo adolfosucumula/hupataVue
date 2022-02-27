@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WebContact extends Model
 {
     use HasFactory;
-    protected $table = 'messages';
+    protected $table = 'web_contacts';
 
     protected $fillable = [
         'name',

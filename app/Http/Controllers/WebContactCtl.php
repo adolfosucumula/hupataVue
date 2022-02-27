@@ -40,6 +40,7 @@ class WebContactCtl extends Controller
             $rs = WebContact::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'cellphone' => $request->cellphone,
                 'subject' => $request->subject,
                 'message' => $request->message
             ]);
@@ -98,6 +99,7 @@ class WebContactCtl extends Controller
             ->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'cellphone' => $request->cellphone,
                 'subject' => $request->subject,
                 'message' => $request->message
             ]);

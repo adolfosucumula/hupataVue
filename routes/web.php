@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginCtl;
+use App\Http\Controllers\UserCtl;
 use App\Http\Controllers\WebContactCtl;
+use App\Http\Controllers\WebMessageCtl;
+use App\Models\WebMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +27,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/webcontacts', WebContactCtl::class);
-Route::post('/select/webcontact', [WebContactCtl::class, 'search']);
+Route::resource('/user', UserCtl::class);
+Route::resource('/login', LoginCtl::class);
+Route::resource('/webcontacts', WebMessageCtl::class);
+Route::post('/select/webcontact', [WebMessageCtl::class, 'search']);

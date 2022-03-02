@@ -21,6 +21,8 @@ import ListWebContact from './components/website/Lists.vue';
 import EditWebContactForm from './components/website/EditForm.vue';
 import WebSignIn from './components/website/SignIn.vue';
 import WebSignUp from './components/website/SignUp.vue';
+import DashboardUser from './components/website/DashboardUser.vue';
+import Logout from './components/website/Logout.vue';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -34,6 +36,8 @@ const routes = [
     { path: '/webcontact/form/edit', component: EditWebContactForm   },
     { path: '/webcontact/signin', component: WebSignIn   },
     { path: '/webcontact/signup', component: WebSignUp   },
+    { path: '/web/user/dashboard', component: DashboardUser   },
+    { path: '/web/user/logout', component: Logout   },
 ];
 
 const colorsOption = {

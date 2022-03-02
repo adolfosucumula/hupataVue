@@ -1,6 +1,9 @@
 
 
 <template>
+    <body>
+        <NavbarTop />
+    <Header />
     <section id="contact" class="contact">
       <div class="container">
 
@@ -61,17 +64,20 @@
 
       </div>
     </section>
+    </body>
+
 </template>
 
 <script>
     import axios from 'axios';
 
+    import NavbarTop from '../navbar/NavBarTop.vue';
+    import Header from '../navbar/Header.vue';
 
-
-    //const ax = require('axios');
     export default {
         components:{
-
+            NavbarTop,
+            Header,
         },
         data(){
             return {

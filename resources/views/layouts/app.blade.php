@@ -16,12 +16,12 @@
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="{{ asset('assets/icons/font-awesome/css/fontawesome-all.min.css') }}" rel="stylesheet">
@@ -33,20 +33,31 @@
         <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
         <!-- Template Main CSS File -->
+        <link href="{{ asset('boostrap-5.0.2/dashboard.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 
-        <style>
-           /*::after body {
-                font-family: 'Nunito', sans-serif;
-            }*/
-        </style>
+        <style scoped>
+            .bd-placeholder-img {
+                    font-size: 1.125rem;
+                    text-anchor: middle;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    user-select: none;
+                  }
+
+                  @media (min-width: 768px) {
+                    .bd-placeholder-img-lg {
+                      font-size: 3.5rem;
+                    }
+                  }
+            </style>
     </head>
     <body class="antialiased">
 
-        <div id="app">
+        <main id="app">
             @yield('content')
-        </div>
+        </main>
         <script src="{{ asset('js/app.js') }}"></script>
 
         <!-- Vendor JS Files -->
@@ -59,5 +70,12 @@
 
         <!-- Template Main JS File -->
         <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        @auth
+        <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"> </script>
+        <script src="{{ asset('boostrap-5.0.2/dashboard.js') }}"></script>
+        @endauth
     </body>
 </html>

@@ -24,34 +24,43 @@ class LoginCtl extends Controller
 
     public function store(Request $request)
     {
+        $this->validate( $request, [
+            'username' => 'required|email',
+            'password' => 'bail|required|min:5',
+        ]);
+
         try {
-            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            if(Auth::attempt(['email' => $request->username, 'password' => $request->password])){
                 return response()->json(
-                    ['logged'=> Auth::check(),
+                    ['loggin'=> Auth::check(),
                     'user'=> Auth::user()
-                    ]);
+                    ],200);
             }
-            return response()->json(['logged'=>Auth::check()]);
+            return response()->json(['loggin'=>Auth::check()],401);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json($th);
         }
     }
 
-    public function login(Request $request)
+    public function logout()
     {
         try {
-            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            if(Auth::logout()){
                 return response()->json(
-                    ['logged'=> Auth::check(),
+                    ['loggin'=> Auth::check(),
                     'user'=> Auth::user()
                     ]);
             }
-            return response()->json(['logged'=>Auth::check()]);
+            return response()->json(['loggin'=>Auth::check(),'user'=> Auth::user()]);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json($th);
         }
+    }
+
+    public function checkUserSession(){
+        return response()->json(['loggin' => Auth::check(),'user' => Auth::user()]);
     }
 
 
@@ -63,7 +72,13 @@ class LoginCtl extends Controller
 
     public function edit($id)
     {
-        //
+        try {
+            $rs = User::find(Auth::user()->id);
+            return response()->json(['user' => $rs]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json($th);
+        }
     }
 
 

@@ -27,7 +27,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/user', UserCtl::class);
+Route::resource('/users', UserCtl::class);
 Route::resource('/login', LoginCtl::class);
+Route::get('/logout/system', [LoginCtl::class,'logout']);
+Route::get('/check/user-session', [LoginCtl::class,'checkUserSession']);
 Route::resource('/webcontacts', WebMessageCtl::class);
 Route::post('/select/webcontact', [WebMessageCtl::class, 'search']);

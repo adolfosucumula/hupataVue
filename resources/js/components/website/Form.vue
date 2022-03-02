@@ -1,6 +1,9 @@
 
 <template>
-    <section id="contact" class="contact">
+    <body>
+        <NavbarTop />
+        <Header />
+        <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title">
@@ -67,6 +70,8 @@
 
       </div>
     </section>
+
+    </body>
 </template>
 
 <script>
@@ -75,10 +80,13 @@
     import { required,email,string } from '@vuelidate/validators'
     import axios from 'axios';
 
+    import NavbarTop from '../navbar/NavBarTop.vue';
+    import Header from '../navbar/Header.vue';
 
-    //const ax = require('axios');
     export default {
         components:{
+            NavbarTop,
+            Header,
         },
         data(){
             return {
@@ -92,6 +100,7 @@
                 showLoader:false,
                 errorMessage:null,
                 results: [],
+                loggin: false,
             }
         },
         methods: {
@@ -142,7 +151,27 @@
                 this.cellphone =null;
                 this.subject =null;
                 this.message =null;
-            }
+            },
+            checkSession(){
+                axios.get('/check/user-session')
+                    .then((res) => {
+                        if(res.status == 200){
+                            if(res.data.loggin){
+                                this.$router.push('/web/user/dashboard');
+                            }
+                        }else{
+                            console.log(res.data)
+                        }
+                    })
+                    .catch((error) =>{
+                        console.log(error);
+                    });
+            },
+
+
+        },
+        mounted(){
+            this.checkSession();
 
         }
     }

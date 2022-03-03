@@ -6,4 +6,8 @@
 <p>$ php artisan key:generate</p>
 <p>$ php artisan config:cache</p>
 <p>$ php artisan cache:clear</p>
+<p> Becouse this project include VueJS is neccessary to run npm commands</p>
+<p>$ npm install</p>
+<p>$ npm run dev</p>
+<p>$ npm run watch</p>
 <p>$ php artisan serve</p>

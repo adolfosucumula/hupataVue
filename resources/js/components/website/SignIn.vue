@@ -45,7 +45,13 @@
                                     <div v-if="failed" class="my-3 text-danger">Username or password wrang...</div>
                                     <div v-if="showLoader" class="my-3 text-center"><img src="images/Ellipsis-1s-58px.gif" alt=""> </div>
 
-                                    <div class="text-center my-3"><button class="btn btn-info btn-bordered " type="submit">Send Message</button></div>
+                                    <div class="text-center my-3">
+                                        <button class="btn btn-info btn-bordered " type="submit">Send Message</button>
+                                        <b-button variant="primary" disabled>
+                                            <b-spinner small type="grow"></b-spinner>
+                                            Loading...
+                                        </b-button>
+                                    </div>
                             </form>
                             </div>
                         </div>

@@ -70,6 +70,7 @@
 
         <!-- Template Main JS File -->
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/js/menu.js') }}"></script>
 
         @auth
         <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>

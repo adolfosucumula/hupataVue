@@ -13,6 +13,11 @@ import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueTheMask from 'vue-the-mask';
 import Notifications from 'vue-notification';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 import Home from './components/website/Home.vue';
@@ -23,11 +28,16 @@ import WebSignIn from './components/website/SignIn.vue';
 import WebSignUp from './components/website/SignUp.vue';
 import DashboardUser from './components/website/DashboardUser.vue';
 import Logout from './components/website/Logout.vue';
+import RecentJobs from './components/website/RecentJobs.vue';
+import SavedJobs from './components/website/SavedJobs.vue';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(VueTheMask);
 Vue.use(Notifications);
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 const routes = [
     { path: '/', component: Home   },
@@ -38,6 +48,8 @@ const routes = [
     { path: '/webcontact/signup', component: WebSignUp   },
     { path: '/web/user/dashboard', component: DashboardUser   },
     { path: '/web/user/logout', component: Logout   },
+    { path: '/web/user/dashboard/recent-jobs', component: RecentJobs   },
+    { path: '/web/user/dashboard/saved-jobs', component: SavedJobs   },
 ];
 
 const colorsOption = {

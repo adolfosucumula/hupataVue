@@ -11,11 +11,8 @@
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="sideba">
-                            <h4 class="sidebar-title"></h4>
-                            <div class="sidebar-item recent-posts">
-                                <div class="card" style="border:0p">
-                                    <div class="card-body">
+                        <div class="card" style="border-radius: 4px 4px 0px 0px">
+                            <div class="card-body">
                                         <div class="container text-center" >
                                             <div class="photo">
                                                 <img class="user-photo" src="assets/img/team/team-1.jpg" alt="" >
@@ -27,31 +24,63 @@
                                                 <span>Full Stack Developer Web and Mobile</span>
                                             </div>
                                         </div>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #E4EBE4;border-radius: 0px 0px 0px 0px">
+                            <div class="card-body">
+                                <div class="container text-center" >
+                                    <div class="">
+                                        <span>Profile state: </span><br>
+                                        <span>...........</span> <span>100 %</span>
+                                    </div>
+                                    <div class="hability">
+                                        <span>__..__</span>
                                     </div>
                                 </div>
-                                <div class="card" style="background-color: #E4EBE4">
-                                    <div class="card-body">
-                                        <div class="container text-center" >
-                                            <div class="">
-                                                <span>Profile state: </span><br>
-                                                <span>...........</span> <span>100 %</span>
-                                            </div>
-                                            <div class="hability">
-                                                <span>__..__</span>
-                                            </div>
-                                        </div>
+                            </div>
+                        </div>
+                        <div class="card" style="background-color: #012a50;color:#fff;border-radius: 0px 0px 4px 4px">
+                            <div class="card-body">
+                                <div class="container text-center" >
+                                    <div class="">
+                                        <span>Hours per week: </span><br>
                                     </div>
                                 </div>
-                            </div><!-- End sidebar recent posts-->
-                        </div><!-- End sidebar -->
+                            </div>
+                        </div>
                     </div><!-- End blog entries list -->
 
                     <div class="col-lg-8 entries">
+                        <div class="form">
+                            <div class="sidebar-item search-form " >
+                                <form v-on:submit.prevent="search()" method="post">
+                                    <input type="text" v-model="search" placeholder="Search for job" class="form-control">
+                                    <button type="submit"><i class="bi bi-search"></i></button>
+                                </form>
+                            </div><!-- End sidebar search formn-->
+                        </div>
+                        <div class="card sidebar-rigth">
+                            <div class="card-header">
+                                <span class="card-title">Jobs you might like</span>
+                                <div class="men">
+                                    <nav>
+                                    <ul>
+                                        <li><router-link to="/web/user/dashboard/recent-jobs">Recent Jobs</router-link></li>
+                                        <li><router-link to="/web/user/dashboard/saved-jobs">Saved Jobs </router-link></li>
+                                    </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="card-body menu-job">
 
-                        <div class="entry-img">
+                            </div>
+                        </div>
+                        <div class="card sidebar-rigth">
+                            <div class="card-body">
+
+                            </div>
 
                         </div>
-
                     </div><!-- End blog entries list -->
 
                 </div>
@@ -78,17 +107,25 @@
         },
         data(){
             return {
-                username: null,
-                password: null,
-                message: null,
-                failed: false,
+                search: null,
                 showLoader:false,
-                isLogging: false,
                 loggin: false,
                 result:[],
+                color:'',
+                tabIndex: 0
             }
         },
         methods: {
+            async search(){
+
+            },
+            linkClass(idx) {
+                if (this.tabIndex === idx) {
+                return ['bg-primary', 'text-light']
+                } else {
+                return ['bg-light', 'text-info']
+                }
+            },
             checkSession(){
                 axios.get('/check/user-session')
                     .then((res) => {
@@ -109,6 +146,9 @@
                         console.log(error);
                     });
             },
+            abrirModal(){
+
+            }
 
         },
         mounted(){
@@ -121,13 +161,195 @@
     }
 </script>
 <style scoped>
-.user-photo{
-    max-width: 60px;
-    max-height: 60px;
-    border-radius: 30px;
+    .user-photo{
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 40px;
+    }
+    .name{
+        text-decoration: underline;
+    }
+
+    .blog .sideba {
+    padding: 0px;
+    margin: 0 0 60px 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    .blog .form {
+    padding: 0px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    .tab{
+        background-color: #012a50;
+        border-bottom: 0px;
+    }
+
+.sidebar-rigth{
+    border-radius: 0px 0px 0px 0px;
 }
-.name{
-    text-decoration: underline;
+
+.card-title{
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #fff;
 }
+.card-header{
+    padding: 4px;
+    background-color: #012a50;
+    border-bottom: 0px;
+}
+.menu{
+    position: absolute;
+    display: block;
+    margin-top: 1%;
+    background: #012a50;
+}
+
+.menu .title{
+    padding: 0%;
+    margin-left: 0%;
+    text-decoration: none;
+    color: #ddd;
+}
+.menu-job{
+    background-color: #012a50;
+}
+.blog .sideba .sidebar-title {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0 0 0 0;
+  margin: 0 0 15px 0;
+  color: #473d3a;
+  position: relative;
+}
+.blog .sideba .sidebar-item {
+  margin-bottom: 30px;
+}
+.sidebar-item {
+  margin-bottom: 30px;
+}
+
+.blog .sideba .search-form form {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+  position: relative;
+}
+form {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+  position: relative;
+}
+.blog .sideba .search-form form input[type=text] {
+  border: 0;
+  padding: 4px;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+}
+form input[type=text] {
+  border: 0;
+  padding: 4px;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+  font-size: 0.9em;
+}
+.blog .sideba .search-form form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 15px;
+  margin: -1px;
+  background: #2194ff;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 4px 4px 0;
+  line-height: 0;
+}
+.search-form form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 15px;
+  margin: -1px;
+  background: #2194ff;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 4px 4px 0;
+  line-height: 0;
+}
+.blog .sideba .search-form form button i {
+  line-height: 0;
+}
+.search-form form button i {
+  line-height: 0;
+}
+.blog .sideba .search-form form button:hover {
+  background: #ff6735;
+}
+.search-form form button:hover {
+  background: #35ff72;
+}
+.search-form form button i:hover {
+    font-size: 1.3em;
+}
+
+nav{
+    position: relative;
+  padding-bottom: 12px;
+}
+.line
+    {
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        margin: 10px 0 0 0;
+        background: #FF1847;
+    }
+
+
+  ul{
+      padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+  }
+
+    li{
+        margin: 0 40px 0 0;
+      opacity: .4;
+      transition: all 0.4s ease;
+    }
+
+      li:hover{
+          opacity: .7;
+      }
+
+      li .active{
+          opacity: 1
+      }
+
+      li:last-child{
+          margin-right: 0;
+      }
+
+      a{
+          text-decoration: none;
+        color: #fff;
+        text-transform: uppercase;
+        display: block;
+        font-weight: 600;
+        letter-spacing: .2em;
+        font-size: 14px;
+      }
+
 </style>
 

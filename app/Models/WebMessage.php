@@ -9,7 +9,7 @@ class WebMessage extends Model
 {
     use HasFactory;
 
-    protected $table = 'web_message';
+    protected $table = 'web_messages';
 
     protected $fillable = [
         'name',

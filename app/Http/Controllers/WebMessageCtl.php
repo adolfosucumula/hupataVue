@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WebMessageRequest;
 use App\Models\WebMessage;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class WebMessageCtl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WebMessageRequest $request)
     {
         try {
             $rs = WebMessage::create([
@@ -44,10 +45,10 @@ class WebMessageCtl extends Controller
                 'subject' => $request->subject,
                 'message' => $request->message
             ]);
-            return response()->json($rs);
+            return response()->json(['inserted'=>$rs->id,'saved'=>true],200);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json($th);
+            return response()->json(['errors'=>$th,'error'=>$th->getMessage(),'saved'=>false],422);
         }
     }
 

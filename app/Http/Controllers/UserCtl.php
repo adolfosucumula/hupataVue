@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserCtl extends Controller
 {
@@ -32,9 +36,36 @@ class UserCtl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $pathToFile = '';
+        if($request->photo !=''){
+            $pathToFile = $request->file('photo')->store('images', 'public');
+        }
+
+        try {
+            $rs = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'level' => $request->level,
+                'status' => $request->status,
+                'photo' => $pathToFile,
+                'password' => Hash::make($request->password),
+            ]);
+
+            if($rs->id){
+                return response()->json(['save'=>true,'inserted'=> $rs->id,],200);
+            }else{
+                Storage::delete($pathToFile);
+                return response()->json(['save'=>false,'inserted'=> 0,],422);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            Storage::delete($pathToFile);
+            return response()->json(['save'=>false,'error'=> $th,'imagePath'=>$pathToFile,'error_message'=> $th->getMessage(),
+            'photo'=>$request->photo],422);
+        }
+        Storage::delete($pathToFile);
     }
 
     /**

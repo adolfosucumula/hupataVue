@@ -39,6 +39,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+
 const routes = [
     { path: '/', component: Home   },
     { path: '/webcontact/form', component: FormWebContact   },

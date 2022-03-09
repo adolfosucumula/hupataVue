@@ -31,6 +31,7 @@
                                                     <i class="bx bx-envelop"></i>
                                                     <input type="email" v-model="username" name="username" class="form-control" id="name" placeholder="Your Email" required>
                                                 </div>
+                                                <span v-if="e_email" class="text-center text-danger">{{e_email}}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 form-group mt-3 mt-md-0">
@@ -39,18 +40,25 @@
                                                     <i class="bx bx-ke"></i>
                                                     <input type="password" class="form-control" v-model="password" name="password" id="password" placeholder="Your password" required>
                                                 </div>
+                                                <span v-if="e_password" class="text-center text-danger">{{e_password}}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-if="failed" class="my-3 text-danger">Username or password wrang...</div>
-                                    <div v-if="showLoader" class="my-3 text-center"><img src="images/Ellipsis-1s-58px.gif" alt=""> </div>
 
                                     <div class="text-center my-3">
-                                        <button class="btn btn-info btn-bordered " type="submit">Send Message</button>
-                                        <b-button variant="primary" disabled>
+                                        <b-button variant="info" type="submit">
                                             <b-spinner small type="grow"></b-spinner>
-                                            Loading...
+                                            Send Message
                                         </b-button>
+                                    </div>
+                                    <div v-if="failed" class="my-3 text-danger">Username or password wrang...</div>
+                                    <div v-if="showLoader" class="my-3 text-center"><img src="images/Ellipsis-1s-58px.gif" alt=""> </div>
+                                    <div v-if="errorMessage" class="text-center error-message">
+                                        <span class="text-danger">{{ errorMessage }}</span>
+                                    </div>
+                                    <!--    -->
+                                    <div class="text-center" v-for="err in notifmsg" :key="err">
+                                        <span class="text-danger">{{ err  }} </span>
                                     </div>
                             </form>
                             </div>
@@ -85,30 +93,43 @@
                 failed: false,
                 showLoader:false,
                 isLogging: false,
-                result:[],
+                user:[],
+                e_email:null,
+                e_password:null,
+                errorMessage:null,
+                notifmsg:null,
             }
         },
         methods: {
             async login(){
                 this.showLoader = true;
 
-                axios.post('/login',{username: this.username, password: this.password})
+                await axios.post('/login',{email: this.username, password: this.password})
                     .then((res) => {
                         if(res.status == 200){
-                            this.clearFields();
-                            this.failed = false;
-                            this.checkSession();
-
+                            if(res.data.loggin){
+                                this.clearFields();
+                                this.failed = false;
+                                localStorage.setItem('loggin', res.data.loggin)
+                                localStorage.setItem('email', res.data.user.email)
+                                localStorage.setItem('status', res.data.user.status)
+                                localStorage.setItem('level', res.data.user.level)
+                                localStorage.setItem('imagePath', res.data.user.photo)
+                                this.checkSession();
+                            }
                         }else{
                             this.failed = true;
+                            this.errorMessage = res.data.error
+                            this.notifmsg = res.data
                         }
                         this.showLoader = false;
                     })
-                    .catch((error) =>{
-                        console.log(error);
+                    .catch((e) =>{
+                        console.log(e);
                         this.showLoader = false;
                         this.failed = true;
-                    });
+                        this.getRequestErrors(e.response.data.errors);
+                    }); this.showLoader = false;
             },
 
             checkSession(){
@@ -121,15 +142,20 @@
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
                                 localStorage.setItem('level', res.data.user.level)
+                                localStorage.setItem('imagePath', res.data.user.photo)
                                 this.$router.push('/web/user/dashboard');
+                            }else{
+                                //this.errorMessage = res.data.error
+                                //this.notifmsg = res.data
                             }
+                            console.log(res.data)
                             this.showLoader = false;
                         }else{
                             console.log(res.data)
                         }
                     })
-                    .catch((error) =>{
-                        console.log(error);
+                    .catch((e) =>{
+                        console.log(e);
                         this.showLoader = false;
                     });
             },
@@ -137,8 +163,18 @@
             clearFields(){
                 this.username =null;
                 this.password =null;
-                this.message =null;
-            }
+                this.errorMessage =null;
+                this.e_email =null;
+                this.e_password =null;
+                this.notifmsg =null;
+            },
+            getRequestErrors(errors){
+                try {
+                    if(errors.email){ this.e_email = errors.email[0]; }else{this.e_email=''}
+                    if(errors.password){ this.e_password = errors.password[0]; }else{this.e_password=''}
+                } catch (error) {
+                }
+            },
 
         },
         mounted(){

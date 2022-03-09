@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,15 +23,10 @@ class LoginCtl extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $this->validate( $request, [
-            'username' => 'required|email',
-            'password' => 'bail|required|min:5',
-        ]);
-
         try {
-            if(Auth::attempt(['email' => $request->username, 'password' => $request->password])){
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                 return response()->json(
                     ['loggin'=> Auth::check(),
                     'user'=> Auth::user()
@@ -39,7 +35,7 @@ class LoginCtl extends Controller
             return response()->json(['loggin'=>Auth::check()],401);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json($th);
+            return response()->json(['errors'=>$th,'error'=>$th->getMessage()],422);
         }
     }
 
@@ -55,7 +51,7 @@ class LoginCtl extends Controller
             return response()->json(['loggin'=>Auth::check(),'user'=> Auth::user()]);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json($th);
+            return response()->json(['errors'=>$th,'error'=>$th->getMessage()],422);
         }
     }
 

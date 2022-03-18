@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CitySeed::class,
             CategoryKnowledgeSeed::class,
             SubCategoryKnowledgeSeed::class,
+            DefaultSettingsSeed::class,
         ]);
     }
 }

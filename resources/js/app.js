@@ -30,6 +30,8 @@ import DashboardUser from './components/website/DashboardUser.vue';
 import Logout from './components/website/Logout.vue';
 import RecentJobs from './components/website/RecentJobs.vue';
 import SavedJobs from './components/website/SavedJobs.vue';
+import Jobs from './components/website/Jobs.vue';
+import JobDetails from './components/website/JobDetails.vue';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -51,11 +53,13 @@ const routes = [
     { path: '/web/user/logout', component: Logout   },
     { path: '/web/user/dashboard/recent-jobs', component: RecentJobs   },
     { path: '/web/user/dashboard/saved-jobs', component: SavedJobs   },
+    { path: '/web/dashboard/jobs', component: Jobs  },
+    { path: '/web/dashboard/job/:title/:id', component: JobDetails  },
 ];
 
 const colorsOption = {
     confirmButtonColor: '#41b882',
-  cancelButtonColor: '#ff7674',
+    cancelButtonColor: '#ff7674',
 };
 
 Vue.use(VueSweetalert2, colorsOption);

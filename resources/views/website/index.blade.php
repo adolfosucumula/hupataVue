@@ -11,7 +11,7 @@
             <div class="row">
 
             <div class="col-lg-3 col-md-6 footer-contact">
-                <h3>Hupata</h3>
+                <h3>FreelancerANG</h3>
                 <p>
                 Ilha Luanda <br>
                 Luanda, IL Street<br>
@@ -58,7 +58,7 @@
         <div class="container d-lg-flex py-4">
         <div class="me-lg-auto text-center text-lg-start">
             <div class="copyright">
-            &copy; Copyright <strong><span>Hupata</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>FreelancerANG</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
             <!-- All the links in the footer should remain intact. -->

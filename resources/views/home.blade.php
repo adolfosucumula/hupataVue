@@ -26,7 +26,7 @@
         <div class="container d-flex align-items-center justify-content-between">
 
             <div class="logo">
-                <h1><router-link to="/" style="font-family: 'Pacifico', cursive; color: #492703">Hupata</router-link></h1>
+                <h1><router-link to="/" style="font-family: 'Pacifico', cursive; color: #492703">FreelancerANG</router-link></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
@@ -72,7 +72,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Hupata</h3>
+            <h3>FreelancerANG</h3>
             <p>
               Ilha Luanda <br>
               Luanda, IL Street<br>
@@ -120,7 +120,7 @@
 
       <div class="me-lg-auto text-center text-lg-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Hupata</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>FreelancerANG</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->

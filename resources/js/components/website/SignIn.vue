@@ -48,7 +48,7 @@
                                     <div class="text-center my-3">
                                         <b-button variant="info" type="submit">
                                             <b-spinner small type="grow"></b-spinner>
-                                            Send Message
+                                            Sign In
                                         </b-button>
                                     </div>
                                     <div v-if="failed" class="my-3 text-danger">Username or password wrang...</div>
@@ -115,6 +115,8 @@
                                 localStorage.setItem('status', res.data.user.status)
                                 localStorage.setItem('level', res.data.user.level)
                                 localStorage.setItem('imagePath', res.data.user.photo)
+                                localStorage.setItem('currency', res.data.settings[0].currency)
+                                localStorage.setItem('app_tax_percent', res.data.settings[0].app_tax_percent)
                                 this.checkSession();
                             }
                         }else{
@@ -142,6 +144,8 @@
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
                                 localStorage.setItem('level', res.data.user.level)
+                                localStorage.setItem('currency', res.data.settings[0].currency)
+                                localStorage.setItem('app_tax_percent', res.data.settings[0].app_tax_percent)
                                 localStorage.setItem('imagePath', res.data.user.photo)
                                 this.$router.push('/web/user/dashboard');
                             }else{

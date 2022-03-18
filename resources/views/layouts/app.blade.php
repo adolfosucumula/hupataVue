@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Hupata</title>
+        <title>FreelancerANG</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 

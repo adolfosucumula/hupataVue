@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobsCtl;
 use App\Http\Controllers\LoginCtl;
 use App\Http\Controllers\UserCtl;
 use App\Http\Controllers\WebContactCtl;
@@ -33,3 +34,6 @@ Route::get('/logout/system', [LoginCtl::class,'logout']);
 Route::get('/check/user-session', [LoginCtl::class,'checkUserSession']);
 Route::resource('/webcontacts', WebMessageCtl::class);
 Route::post('/select/webcontact', [WebMessageCtl::class, 'search']);
+Route::resource('/jobs', JobsCtl::class);
+Route::post('/select/jobs', [JobsCtl::class, 'search']);
+Route::post('/view/jobs', [JobsCtl::class, 'viewJob']);

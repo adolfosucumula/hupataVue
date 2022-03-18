@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div v-if="showLoader" class="my-3"><img src="images/Ellipsis-1s-58px.gif" alt=""> </div>
-                    <div class="text-center my-3"><button type="submit">Send Message</button></div>
+                    <div class="text-center my-3"><button type="submit">Submit</button></div>
 
                     </form>
                     <div v-if="errorMessage" class="text-center error-message">

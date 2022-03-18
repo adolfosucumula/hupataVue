@@ -17,7 +17,7 @@ class CreateWorkerProfilesTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('worker_id');
             $table->foreign('worker_id')->references('id')->on('workers');
-            $table->string('knowledge')->nullable();
+            $table->text('knowledge')->nullable();
             $table->timestamps();
         });
     }

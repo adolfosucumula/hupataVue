@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\DefaultSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,8 @@ class LoginCtl extends Controller
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                 return response()->json(
                     ['loggin'=> Auth::check(),
-                    'user'=> Auth::user()
+                    'user'=> Auth::user(),
+                    'settings' => DefaultSetting::all(),
                     ],200);
             }
             return response()->json(['loggin'=>Auth::check()],401);
@@ -56,7 +58,11 @@ class LoginCtl extends Controller
     }
 
     public function checkUserSession(){
-        return response()->json(['loggin' => Auth::check(),'user' => Auth::user()]);
+        return response()->json([
+            'loggin' => Auth::check(),
+            'user' => Auth::user(),
+            'settings' => DefaultSetting::all(),
+        ]);
     }
 
 

@@ -17,6 +17,11 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('people_id');
             $table->foreign('people_id')->references('id')->on('people');
+            $table->string('code');
+            $table->string('address');
+            $table->string('country_address')->nullable();
+            $table->integer('telephone')->nullable();
+            $table->string('email');
             $table->timestamps();
         });
     }

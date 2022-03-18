@@ -137,6 +137,8 @@
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
                                 localStorage.setItem('level', res.data.user.level)
+                                localStorage.setItem('currency', res.data.settings[0].currency)
+                                localStorage.setItem('app_tax_percent', res.data.settings[0].app_tax_percent)
                             }
                         }else{
                             console.log(res.data)

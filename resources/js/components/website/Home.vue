@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-8 container" data-aos="fade-in">
-                    <h1 style="font-family: 'Pacifico', cursive;">Welcome to Hupata</h1>
+                    <h1 style="font-family: 'Pacifico', cursive;">Welcome to FreelancerANG</h1>
                     <h2>We are team of talented workers in the several scientific knowledge areas.</h2>
                     <div class="row">
                         <div class="col-md-5">

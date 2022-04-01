@@ -2,6 +2,7 @@
 (function(){
 
 var nav = $('nav');
+var list = $('.list');
 var line = $('<div />').addClass('line');
 
 line.appendTo(nav);
@@ -63,4 +64,21 @@ nav.find('ul li a').click(function(e) {
   }
 });
 
+
+
+
 })
+
+
+
+
+/*   Navigation Effetc */
+   /* const list = document.querySelectorAll('.list');
+    function activeLink(){
+        list.forEach((item) =>
+        item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    list.forEach((item) =>
+    item.addEventListener('click', activeLink ));*/
+

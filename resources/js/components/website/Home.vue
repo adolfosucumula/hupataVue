@@ -1,7 +1,7 @@
 
 <template>
     <body>
-        <NavbarTop />
+       <!-- <NavbarTop />-->
         <Header />
 
         <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
@@ -382,7 +382,7 @@
                     .then((res) => {
                         if(res.status == 200){
                             if(res.data.loggin){
-                                this.$router.push('/web/user/dashboard');
+                                this.$router.push('/web/dashboard');
                             }
                         }else{
                             console.log(res.data)

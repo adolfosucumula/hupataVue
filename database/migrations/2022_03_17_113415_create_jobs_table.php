@@ -17,13 +17,12 @@ class CreateJobsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('customer_code');
             $table->string('title');
             $table->text('detail');
             $table->string('requirements');
-            $table->decimal('tax_peer_hour',10,2);
+            $table->decimal('tax_per_hour',10,2);
             $table->decimal('total_tax',10,2);
-            $table->string('total_day');
+            $table->string('time_required');
             $table->string('preferences')->nullable();
             $table->string('currency');
             $table->timestamps();

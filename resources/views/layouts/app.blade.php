@@ -33,7 +33,7 @@
         <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
         <!-- Template Main CSS File -->
-        <link href="{{ asset('boostrap-5.0.2/dashboard.css') }}" rel="stylesheet">
+        <!--<link href="{{ asset('boostrap-5.0.2/dashboard.css') }}" rel="stylesheet">-->
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 
@@ -51,13 +51,17 @@
                       font-size: 3.5rem;
                     }
                   }
-            </style>
+
+        </style>
     </head>
+
     <body class="antialiased">
 
         <main id="app">
             @yield('content')
         </main>
+
+
         <script src="{{ asset('js/app.js') }}"></script>
 
         <!-- Vendor JS Files -->
@@ -72,11 +76,11 @@
         <script src="{{ asset('assets/js/main.js') }}"></script>
         <script src="{{ asset('assets/js/menu.js') }}"></script>
 
-        @auth
+
         <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"> </script>
         <script src="{{ asset('boostrap-5.0.2/dashboard.js') }}"></script>
-        @endauth
+
     </body>
 </html>

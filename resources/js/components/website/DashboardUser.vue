@@ -10,77 +10,59 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card" style="border-radius: 4px 4px 0px 0px">
-                            <div class="card-body">
-                                        <div class="container text-center" >
-                                            <div class="photo">
-                                                <img class="user-photo" src="assets/img/team/team-1.jpg" alt="" >
-                                            </div>
-                                            <div class="name">
-                                                <span><b>{{ username }}</b></span>
-                                            </div>
-                                            <div class="hability">
-                                                <span>Full Stack Developer Web and Mobile</span>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                        <div class="card" style="background-color: #E4EBE4;border-radius: 0px 0px 0px 0px">
-                            <div class="card-body">
-                                <div class="container text-center" >
-                                    <div class="">
-                                        <span>Profile state: </span><br>
-                                        <span>...........</span> <span>100 %</span>
-                                    </div>
-                                    <div class="hability">
-                                        <span>__..__</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" style="background-color: #012a50;color:#fff;border-radius: 0px 0px 4px 4px">
-                            <div class="card-body">
-                                <div class="container text-center" >
-                                    <div class="">
-                                        <span>Hours per week: </span><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End blog entries list -->
+
+                    <SideBar />
 
                     <div class="col-lg-8 entries">
-                        <div class="form">
-                            <div class="sidebar-item search-form " >
-                                <form v-on:submit.prevent="search()" method="post">
-                                    <input type="text" v-model="search" placeholder="Search for job" class="form-control">
-                                    <button type="submit"><i class="bi bi-search"></i></button>
-                                </form>
-                            </div><!-- End sidebar search formn-->
-                        </div>
-                        <div class="card sidebar-rigth">
-                            <div class="card-header">
-                                <span class="card-title">Jobs you might like</span>
-                                <div class="men">
-                                    <nav>
-                                    <ul>
-                                        <li><router-link to="/web/user/dashboard/recent-jobs">Recent Jobs</router-link></li>
-                                        <li><router-link to="/web/user/dashboard/saved-jobs">Saved Jobs </router-link></li>
-                                    </ul>
-                                    </nav>
+
+                        <slot class="dasboard-slot-pages">
+                            <div class="form">
+                                <div class="sidebar-item search-form " >
+                                    <form v-on:submit.prevent="search()" method="post">
+                                        <input type="text" v-model="search" placeholder="Search for job" class="form-control">
+                                        <button type="submit"><i class="bi bi-search"></i></button>
+                                    </form>
+                                </div><!-- End sidebar search formn-->
+                            </div>
+
+                            <div class="card sidebar-rigth">
+                                <div class="card-header">
+                                    <span class="card-title">Jobs you might like</span>
+                                </div>
+                                <div class="card-body menu-job">
+                                    <div class="navigation">
+                                        <ul>
+                                            <li class="list active">
+                                                <a href="javascript:void(0);" @click="showComp('posted')"  title="Posted Jobs">
+                                                    <span class="fas fa-home icon"></span>
+                                                    <span class="text">Posted Jobs</span>
+                                                </a>
+                                            </li>
+                                            <li class="list">
+                                                <a href="javascript:void(0);" @click="showComp('saved')" title="Saved Jobs">
+                                                    <span class="fas fa-home icon"></span>
+                                                    <span class="text">Saved Jobs</span>
+                                                </a>
+                                            </li>
+                                            <li class="list">
+                                                <a href="javascript:void(0);" @click="showComp('finalized')" title="Finalized Jobs">
+                                                    <span class="fas fa-home icon"></span>
+                                                    <span class="text">Finalized Jobs</span>
+                                                </a>
+                                            </li>
+                                            <li class="list">
+                                                <a href="javascript:void(0);" @click="showComp('actual')" title="Actual Jobs">
+                                                    <span class="fas fa-home icon"></span>
+                                                    <span class="text">Actual Jobs</span>
+                                                </a>
+                                            </li>
+                                            <div class="indicator"></div>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body menu-job">
+                        </slot>
 
-                            </div>
-                        </div>
-                        <div class="card sidebar-rigth">
-                            <div class="card-body">
-
-                            </div>
-
-                        </div>
                     </div><!-- End blog entries list -->
 
                 </div>
@@ -95,6 +77,7 @@
 <script>
 
     import Header from '../navbar/Header.vue';
+    import SideBar from '../navbar/SideBar.vue'
     import useVuelidate from '@vuelidate/core';
     import { required,email,string } from '@vuelidate/validators'
     import axios from 'axios';
@@ -104,15 +87,18 @@
     export default {
         components:{
             Header,
+            SideBar,
         },
         data(){
             return {
+                user_id:null,
                 search: null,
                 showLoader:false,
                 loggin: false,
                 result:[],
                 color:'',
-                tabIndex: 0
+                tabIndex: 0,
+                showComponent:'posted'
             }
         },
         methods: {
@@ -133,6 +119,7 @@
                             if(!res.data.loggin){
                                 this.$router.push('/webcontact/signin');
                             }else{
+                                localStorage.setItem('userID', res.data.user.id)
                                 localStorage.setItem('loggin', res.data.loggin)
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
@@ -148,21 +135,28 @@
                         console.log(error);
                     });
             },
-            abrirModal(){
-
+            showComp(comp){
+                this.showComponent = comp
             }
 
         },
         mounted(){
             this.checkSession();
+
+            this.user_id = localStorage.getItem('userID');
             this.username = localStorage.getItem('username');
             this.loggin = localStorage.getItem('loggin');
-
-            //alert(localStorage.getItem('username'))
         }
     }
+
+
+
+
 </script>
 <style scoped>
+    :root{
+        --clr: #222327;
+    }
     .user-photo{
         max-width: 80px;
         max-height: 80px;
@@ -344,7 +338,7 @@ nav{
       }
 
       a{
-          text-decoration: none;
+        text-decoration: none;
         color: #fff;
         text-transform: uppercase;
         display: block;
@@ -352,6 +346,128 @@ nav{
         letter-spacing: .2em;
         font-size: 14px;
       }
+
+
+ /* Magic Navigation Indicator CSS code */
+/*
+      .navigation{
+          width: 600px;
+          height: 70px;
+          background: #fff;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+      }
+      .navigation ul{
+          display: flex;
+          width: 500px;
+      }
+      .navigation ul li{
+          position: relative;
+          list-style: none;
+          width: 200px;
+          height: 70px;
+          z-index: 1;
+      }
+      .navigation ul li a{
+          color: #000;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          width: 100%;
+          text-align: center;
+          font-weight: 500;
+      }
+      .navigation ul li a .icon{
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: var(--clr);
+      }
+      .navigation ul li.active a .icon{
+          transform: translateY(-32px);
+          color: #fff;
+          font-size: 1.7em;
+      }
+      .navigation ul li a .text{
+          position: absolute;
+          color: var(--clr);
+          font-weight: bold;
+          font-size: 0.75em;
+          letter-spacing: 0.05em;
+          transition: 0.5s;
+          opacity: 0;
+          transform: translateY(20px);
+      }
+
+       .navigation ul li.active a .text{
+          opacity: 1;
+          transform: translateY(10px);
+          top: 38%;
+      }
+      .indicator{
+          position: absolute;
+          top: -40%;
+          left: 9.5%;
+          width: 65px;
+          height: 65px;
+          background: #2194ff;
+          border: 6px solid #0A2A50;
+          border-radius: 50%;
+          transition: 0.5s;
+      }
+      .indicator::before{
+          content: '';
+          position: absolute;
+          top: 42%;
+          left: -22px;
+          width: 20px;
+          height: 20px;
+          background: transparent;
+          border-top-right-radius: 25px;
+          box-shadow: 0px -10px 0 0 #0A2A50;
+      }
+        .indicator::after{
+          content: '';
+          position: absolute;
+          top: 42%;
+          right: -22px;
+          width: 20px;
+          height: 20px;
+          background: transparent;
+          border-top-left-radius: 25px;
+          box-shadow: 0px -10px 0 0 #0A2A50;
+        }
+
+        .navigation ul li:nth-child(1).active ~ .indicator
+        {
+            transform: translateX(calc(150px * 0));
+
+        }
+        .navigation ul li:nth-child(2).active ~ .indicator
+        {
+            transform: translateX(calc(150px * 1));
+            left: 5.5%;
+        }
+        .navigation ul li:nth-child(3).active ~ .indicator
+        {
+            transform: translateX(calc(150px * 2));
+            left: 1.4%;
+        }
+        .navigation ul li:nth-child(4).active ~ .indicator
+        {
+            transform: translateX(calc(150px * 3));
+            left: -3%;
+        }
+
+        */
 
 </style>
 

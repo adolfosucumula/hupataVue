@@ -15,8 +15,6 @@ class CreateCustomerBidsTable extends Migration
     {
         Schema::create('customer_bids', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->unsignedBigInteger('worker_id');
-            $table->foreign('worker_id')->references('id')->on('workers');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('job_id');

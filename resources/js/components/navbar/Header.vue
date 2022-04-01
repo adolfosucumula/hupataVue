@@ -4,7 +4,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 v-if="loggin"><router-link to="/web/user/dashboard" style="font-family: 'Pacifico', cursive; color: #492703">FreelancerANG </router-link></h1>
+                    <h1 v-if="loggin"><router-link to="/web/dashboard" style="font-family: 'Pacifico', cursive; color: #492703">FreelancerANG </router-link></h1>
                     <h1 v-if="!loggin"><router-link to="/" style="font-family: 'Pacifico', cursive; color: #492703">FreelancerANG</router-link></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -14,7 +14,7 @@
                     <ul>
                     <li class="dropdown"><a class="nav-link scrollto " href="javascript:;"><span>Search Talents</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><router-link to="/" style="color: #000">Post a Job</router-link></li>
+                            <li><router-link to="/web/dashboard/job/post" style="color: #000">Post a Job</router-link></li>
                             <li><router-link to="/" style="color: #000">Browse and buy Projects</router-link></li>
                         </ul>
                     </li>
@@ -26,17 +26,15 @@
                     <li><router-link class="nav-link scrollto " to="/web/dashboard/jobs">Search Jobs</router-link></li>
                     <li><a class="nav-link scrollto" href="#projects">Posted Projects</a></li>
                     <li v-if="!loggin"><router-link class="nav-link scrollto" to="/webcontact/form" > Contacts </router-link></li>
+                    <li v-if="loggin"><router-link class="nav-link scrollto" to="" > Message </router-link></li>
                     <li v-if="loggin" class="dropdown ">
-                        <a class="nav-link scrollto " href="javascript:;"> {{username}} <i class="bi bi-chevron-down"></i></a>
+                        <a href="javascript:;" class="nav-link"><img class="user-photo" src="assets/img/team/team-1.jpg" alt="" ></a>
                         <ul>
-                            <li><router-link to="/" style="color: #000">Setting</router-link></li>
+                            <li><a href="#" style="color: #000">{{username}}</a></li>
                             <li v-if="loggin"><router-link class="nav-link scrollto" to="/web/user/logout" >
                                 <i class="fa fa-power-off text-danger"></i> Logout </router-link>
                             </li>
                         </ul>
-                    </li>
-                    <li v-if="loggin" class="scrollto">
-                        <a href="javascript:;" class="nav-link"><img class="user-photo" src="assets/img/team/team-1.jpg" alt="" ></a>
                     </li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>

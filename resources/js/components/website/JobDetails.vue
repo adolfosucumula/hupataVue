@@ -1,56 +1,7 @@
 
 <template>
-    <body>
-        <Header :username="username" :loggin="loggin" />
+    <Dashboard>
 
-        <main id="main" style="background-color: #F1F2F4">
-
-            <!-- ======= Blog Section ======= -->
-            <section id="blog" class="blog">
-            <div class="container" data-aos="fade-up">
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card" style="border-radius: 4px 4px 0px 0px">
-                            <div class="card-body">
-                                        <div class="container text-center" >
-                                            <div class="photo">
-                                                <img class="user-photo" src="assets/img/team/team-1.jpg" alt="" >
-                                            </div>
-                                            <div class="name">
-                                                <span><b>{{ username }}</b></span>
-                                            </div>
-                                            <div class="hability">
-                                                <span>Full Stack Developer Web and Mobile</span>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                        <div class="card" style="background-color: #E4EBE4;border-radius: 0px 0px 0px 0px">
-                            <div class="card-body">
-                                <div class="container text-center" >
-                                    <div class="">
-                                        <span>Profile state: </span><br>
-                                        <span>...........</span> <span>100 %</span>
-                                    </div>
-                                    <div class="hability">
-                                        <span>__..__</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" style="background-color: #012a50;color:#fff;border-radius: 0px 0px 4px 4px">
-                            <div class="card-body">
-                                <div class="container text-center" >
-                                    <div class="">
-                                        <span>Hours per week: </span><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End blog entries list -->
-
-                    <div class="col-lg-8 entries">
                         <div class="form">
                             <div class="sidebar-item search-form " >
                                 <form v-on:submit.prevent="searchJobs()" method="post">
@@ -99,20 +50,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div><!-- End blog entries list -->
 
-                </div>
-
-            </div>
-            </section><!-- End Blog Section -->
-
-        </main><!-- End #main -->
-    </body>
+    </Dashboard>
 </template>
 
 <script>
 
-    import Header from '../navbar/Header.vue';
+    import Dashboard from "../website/DashboardUser.vue";
     import useVuelidate from '@vuelidate/core';
     import { required,email,string } from '@vuelidate/validators'
     import axios from 'axios';
@@ -121,7 +65,7 @@
     //const ax = require('axios');
     export default {
         components:{
-            Header,
+            Dashboard,
         },
         data(){
             return {

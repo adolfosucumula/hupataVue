@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryKnowledgeCtl;
 use App\Http\Controllers\JobsCtl;
 use App\Http\Controllers\LoginCtl;
+use App\Http\Controllers\SubcategoryKnowledgeCtl;
 use App\Http\Controllers\UserCtl;
 use App\Http\Controllers\WebContactCtl;
 use App\Http\Controllers\WebMessageCtl;
@@ -37,3 +39,8 @@ Route::post('/select/webcontact', [WebMessageCtl::class, 'search']);
 Route::resource('/jobs', JobsCtl::class);
 Route::post('/select/jobs', [JobsCtl::class, 'search']);
 Route::post('/view/jobs', [JobsCtl::class, 'viewJob']);
+Route::post('/view/posted-jobs', [JobsCtl::class, 'allPostedJobs']);
+Route::resource('/category-knowledges', CategoryKnowledgeCtl::class);
+Route::post('/category-knowledges/select', [CategoryKnowledgeCtl::class, 'search']);
+Route::resource('/sub-category-knowledges', SubcategoryKnowledgeCtl::class);
+Route::post('/sub-category-knowledges/select', [SubcategoryKnowledgeCtl::class, 'search']);

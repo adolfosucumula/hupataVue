@@ -1,7 +1,7 @@
 
 <template>
     <body>
-        <NavbarTop />
+        <!--<NavbarTop />-->
 
         <Header />
 
@@ -110,6 +110,7 @@
                             if(res.data.loggin){
                                 this.clearFields();
                                 this.failed = false;
+                               localStorage.setItem('userID', res.data.user.id)
                                 localStorage.setItem('loggin', res.data.loggin)
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
@@ -140,6 +141,7 @@
                     .then((res) => { console.log(res.data.user)
                         if(res.status == 200){
                             if(res.data.loggin){
+                                localStorage.setItem('userID', res.data.user.id)
                                 localStorage.setItem('loggin', res.data.loggin)
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
@@ -147,7 +149,7 @@
                                 localStorage.setItem('currency', res.data.settings[0].currency)
                                 localStorage.setItem('app_tax_percent', res.data.settings[0].app_tax_percent)
                                 localStorage.setItem('imagePath', res.data.user.photo)
-                                this.$router.push('/web/user/dashboard');
+                                this.$router.push('/web/dashboard');
                             }else{
                                 //this.errorMessage = res.data.error
                                 //this.notifmsg = res.data

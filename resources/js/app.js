@@ -32,6 +32,9 @@ import RecentJobs from './components/website/RecentJobs.vue';
 import SavedJobs from './components/website/SavedJobs.vue';
 import Jobs from './components/website/Jobs.vue';
 import JobDetails from './components/website/JobDetails.vue';
+import PostJobsForm from './components/website/PostJobsForm.vue';
+import PostedJobs from './components/website/PostedJobs.vue';
+
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -41,7 +44,6 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-
 const routes = [
     { path: '/', component: Home   },
     { path: '/webcontact/form', component: FormWebContact   },
@@ -49,12 +51,15 @@ const routes = [
     { path: '/webcontact/form/edit', component: EditWebContactForm   },
     { path: '/webcontact/signin', component: WebSignIn   },
     { path: '/webcontact/signup', component: WebSignUp   },
-    { path: '/web/user/dashboard', component: DashboardUser   },
+    { path: '/web/dashboard', component: DashboardUser   },
     { path: '/web/user/logout', component: Logout   },
-    { path: '/web/user/dashboard/recent-jobs', component: RecentJobs   },
-    { path: '/web/user/dashboard/saved-jobs', component: SavedJobs   },
     { path: '/web/dashboard/jobs', component: Jobs  },
     { path: '/web/dashboard/job/:title/:id', component: JobDetails  },
+    { path: '/web/dashboard/job/post', component: PostJobsForm  },
+    { path: '/web/dashboard/recent-jobs', component: RecentJobs   },
+    { path: '/web/dashboard/saved-jobs', component: SavedJobs   },
+    { path: '/web/dashboard/posted-jobs', component: PostedJobs }
+
 ];
 
 const colorsOption = {
@@ -70,3 +75,15 @@ const app = new Vue({
     el: '#app',
     router,
 });
+
+
+
+/*   Navigation Effetc */
+/*const list = document.querySelectorAll('.list');
+function activeLink(){
+    list.forEach((item) =>
+    item.classList.remove('active'));
+    this.classList.add('active');
+}
+list.forEach((item) =>
+item.addEventListener('click', activeLink ));*/

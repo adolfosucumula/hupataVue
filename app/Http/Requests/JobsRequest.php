@@ -24,7 +24,14 @@ class JobsRequest extends FormRequest
     public function rules()
     {
         return [
-            'search' => 'bail|nullable|max:100',
+            'title' => 'required|max:100',
+            'detail' => 'bail|required|max:300',
+            'requirements' => 'bail|required|max:200',
+            'tax_per_hour' => 'bail|required|numeric',
+            'total_tax' => 'bail|required|numeric',
+            'time_required' => 'bail|required|numeric',
+            'preferences' => 'bail|nullable|max:100',
+            'currency' => 'bail|required|max:10',
         ];
     }
 
@@ -36,7 +43,8 @@ class JobsRequest extends FormRequest
     public function messages()
     {
         return [
-        'search.max' => 'This field require max 100 character',
+        'title.required' => 'This field is required',
+        'title.max' => 'This field require max 1 character',
         ];
     }
 

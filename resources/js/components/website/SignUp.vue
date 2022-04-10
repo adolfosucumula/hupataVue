@@ -1,7 +1,6 @@
 
 <template>
     <body>
-        <NavbarTop />
         <Header />
 
         <section id="contact" class="contact">

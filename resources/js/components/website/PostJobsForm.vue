@@ -45,7 +45,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <span>Tax per hour <span class="text-danger">*</span></span>
-                                            <input type="text" v-model="taxperhour" @keyup="calcTotalTax()" required placeholder="$" class="form-control">
+                                            <input type="text" v-model="taxperhour" ref="inputRef" @keyup="calcTotalTax()" required placeholder="$" class="form-control">
                                             <span v-if="e_taxperhour" class="text-center text-danger">{{e_taxperhour}}</span>
                                         </div>
                                         <div class="col-md-6">
@@ -91,12 +91,20 @@
     import useVuelidate from '@vuelidate/core';
     import { required,email,string } from '@vuelidate/validators'
     import axios from 'axios';
-
+ import { useCurrencyInput } from 'vue-currency-input'
 
     //const ax = require('axios');
     export default {
         components:{
-            Dashboard
+            Dashboard,
+        },
+        props: {
+            modelValue: Number, // Vue 2: value
+            options: Object
+        },
+        setup(props) {
+            const { inputRef } = useCurrencyInput(props.options)
+            return { inputRef }
         },
         data(){
             return {

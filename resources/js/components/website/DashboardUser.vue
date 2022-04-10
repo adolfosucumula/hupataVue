@@ -33,7 +33,7 @@
                                     <div class="navigation">
                                         <ul>
                                             <li class="list active">
-                                                <a href="javascript:void(0);" @click="showComp('posted')"  title="Posted Jobs">
+                                                <a href="javascript:void(0);" id="link" @click="showComp('posted')"  title="Posted Jobs">
                                                     <span class="fas fa-home icon"></span>
                                                     <span class="text">Posted Jobs</span>
                                                 </a>
@@ -51,9 +51,9 @@
                                                 </a>
                                             </li>
                                             <li class="list">
-                                                <a href="javascript:void(0);" @click="showComp('actual')" title="Actual Jobs">
+                                                <a href="javascript:void(0);" @click="showComp('current')" title="Current Jobs">
                                                     <span class="fas fa-home icon"></span>
-                                                    <span class="text">Actual Jobs</span>
+                                                    <span class="text">Current Jobs</span>
                                                 </a>
                                             </li>
                                             <div class="indicator"></div>
@@ -61,6 +61,11 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div v-if="showComponent=='posted'"><PostedJobs /></div>
+                            <div v-if="showComponent=='saved'"> <SavedJobs /></div>
+                            <div v-if="showComponent=='finalized'">Finalized Jobs</div>
+                            <div v-if="showComponent=='current'">Current Jobs</div>
                         </slot>
 
                     </div><!-- End blog entries list -->
@@ -77,7 +82,9 @@
 <script>
 
     import Header from '../navbar/Header.vue';
-    import SideBar from '../navbar/SideBar.vue'
+    import SideBar from '../navbar/SideBar.vue';
+    import SavedJobs from '../website/SavedJobs.vue';
+    import PostedJobs from '../website/PostedJobs.vue';
     import useVuelidate from '@vuelidate/core';
     import { required,email,string } from '@vuelidate/validators'
     import axios from 'axios';
@@ -88,6 +95,8 @@
         components:{
             Header,
             SideBar,
+            SavedJobs,
+            PostedJobs,
         },
         data(){
             return {
@@ -137,6 +146,16 @@
             },
             showComp(comp){
                 this.showComponent = comp
+                /* Navigaion Control  */
+                const list = document.querySelectorAll('.list');
+                function activeLink(){
+                    list.forEach((item) =>
+                    item.classList.remove('active'));
+                    this.classList.add('active');
+                }
+                list.forEach((item) =>
+                item.addEventListener('click', activeLink ));
+
             }
 
         },

@@ -12,6 +12,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueTheMask from 'vue-the-mask';
+import Money from 'v-money';
 import Notifications from 'vue-notification';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
@@ -39,6 +40,7 @@ import PostedJobs from './components/website/PostedJobs.vue';
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(VueTheMask);
+Vue.use(Money, {precision: 4});
 Vue.use(Notifications);
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin

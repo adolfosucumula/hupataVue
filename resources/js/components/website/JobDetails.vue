@@ -22,10 +22,7 @@
                                         <span class="job-title"><b>{{ item.title }}</b></span>
                                     </div>
                                     <div class="col-md-5 widegets">
-                                        <i v-if="!like" class="far fa-thumbs-down"></i>
-                                        <i v-if="like" class="fas fa-thumbs-up text-success"></i>
-                                        <i v-if="!love" class="fas fa-heart text-danger"></i>
-                                        <i v-if="love" class="fas fa-heart text-info"></i>
+                                        <span id="currency">[AOA] {{ item.total_tax }}</span>
                                     </div>
                                 </div>
                                 <div>
@@ -47,6 +44,14 @@
                                         <i class="far fa-map"></i>
                                         <span class="certificate">{{ item.preferences }}</span>
                                     </div>
+                                </div>
+                                <div>
+                                    <button v-if="!bid" @click="bidJob()" class="btn btn-primary btn-sm">Bid</button>
+                                </div>
+                                <div class="bid-form" v-if="bid">
+                                    <form action="" >
+                                        <input type="text" v-model="tax" class="form-control" placeholder="Tax">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -76,8 +81,7 @@
                 jobs:[],
                 color:'',
                 tabIndex: 0,
-                like:false,
-                love:false,
+                bid:false,
                 selected:false,
             }
         },
@@ -109,24 +113,8 @@
 
                 }
             },
-            async searchJobs(){
-                if(this.search){
-                    await axios.post('/select/jobs',{search: this.search })
-                    .then((res) => {
-                        if(res.status == 200){
-                            if(res.data.length > 0){
-                                this.jobs = res.data;
-                            }
-                        }else{
-                            console.log(res.data)
-                        }
-                    })
-                    .catch((error) =>{
-                        console.log(error);
-                    });
-                }else{
-                    this.viewJobs();
-                }
+            async bidJob(){
+                this.bid = true;
             },
             checkSession(){
                 axios.get('/check/user-session')
@@ -364,6 +352,9 @@ nav{
         letter-spacing: .2em;
         font-size: 14px;
       }
+    #currency{
+        font-weight: bold;
+    }
 
 </style>
 

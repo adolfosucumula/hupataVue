@@ -14,25 +14,25 @@
                     <ul>
                     <li class="dropdown"><a class="nav-link scrollto " href="javascript:;"><span>Search Talents</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><router-link to="/web/dashboard/job/post" style="color: #000">Post a Job</router-link></li>
-                            <li><router-link to="/" style="color: #000">Browse and buy Projects</router-link></li>
+                            <li><router-link to="/web/dashboard/job/post" class="sublink" style="color: #000">Post a Job</router-link></li>
+                            <li><router-link to="/" class="sublink"  style="color: #000">Browse and buy Projects</router-link></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link scrollto " href="javascript:;"><span>Search Works</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><router-link to="/" style="color: #000">Find work for your skils</router-link></li>
+                            <li><router-link to="/web/dashboard/jobs" class="sublink" style="color: #000">Find work for your skils</router-link></li>
                         </ul>
                     </li>
                     <li><router-link class="nav-link scrollto " to="/web/dashboard/jobs">Search Jobs</router-link></li>
-                    <li><a class="nav-link scrollto" href="#projects">Posted Projects</a></li>
+
                     <li v-if="!loggin"><router-link class="nav-link scrollto" to="/webcontact/form" > Contacts </router-link></li>
                     <li v-if="loggin"><router-link class="nav-link scrollto" to="" > Message </router-link></li>
                     <li v-if="loggin" class="dropdown ">
                         <a href="javascript:;" class="nav-link"><img class="user-photo" src="assets/img/team/team-1.jpg" alt="" ></a>
                         <ul>
-                            <li><a href="#" style="color: #000">{{username}}</a></li>
-                            <li v-if="loggin"><router-link class="nav-link scrollto" to="/web/user/logout" >
-                                <i class="fa fa-power-off text-danger"></i> Logout </router-link>
+                            <li><a href="#" style="color: #555;">{{username}}</a></li>
+                            <li v-if="loggin"><router-link class="nav-link  sublink" to="/web/user/logout" >
+                                <i class="fa fa-power-off text-danger"></i> <span id="logout">Logout</span> </router-link>
                             </li>
                         </ul>
                     </li>
@@ -75,5 +75,22 @@ export default defineComponent({
     .username{
         max-height: 20px;
         border: 1px solid #ccc;
+    }
+    .navbar ul li a{
+        text-decoration: none;
+    }
+    .navbar ul li .sublink:hover{
+        width: 100%;
+        color: rgb(253, 252, 252);
+        background: rgb(168, 77, 2);
+    }
+    #logout{
+        color: black;
+    }
+    #logout:hover {
+        color: #7e0404;
+        text-transform: capitalize;
+        font-size: 9pt;
+        font-weight: 500;
     }
 </style>

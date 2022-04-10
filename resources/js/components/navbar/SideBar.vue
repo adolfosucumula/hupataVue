@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="container text-center">
           <div class="photo">
-            <img class="user-photo" src="assets/img/team/team-1.jpg" alt="" />
+            <img class="user-photo" :src="userimage" alt="" />
           </div>
           <div class="username">
             <span
@@ -87,6 +87,7 @@ export default defineComponent({
     data(){
         return {
             user:null,
+            userimage:'images/user.png',
         }
     },
     methods: {
@@ -98,6 +99,10 @@ export default defineComponent({
     },
     mounted(){
         this.user = localStorage.getItem('username')
+        if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
+            this.userimage = 'storage/'+localStorage.getItem('imagePath')
+        }
+
     }
 });
 </script>

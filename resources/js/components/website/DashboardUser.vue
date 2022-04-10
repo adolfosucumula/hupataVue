@@ -101,6 +101,7 @@
         data(){
             return {
                 user_id:null,
+                userimage:'images/user.png',
                 search: null,
                 showLoader:false,
                 loggin: false,
@@ -133,8 +134,12 @@
                                 localStorage.setItem('email', res.data.user.email)
                                 localStorage.setItem('status', res.data.user.status)
                                 localStorage.setItem('level', res.data.user.level)
+                                localStorage.setItem('imagePath', res.data.user.photo)
                                 localStorage.setItem('currency', res.data.settings[0].currency)
                                 localStorage.setItem('app_tax_percent', res.data.settings[0].app_tax_percent)
+                                if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
+                                    this.userimage = 'storage/'+localStorage.getItem('imagePath')
+                                }
                             }
                         }else{
                             console.log(res.data)
@@ -163,6 +168,9 @@
             this.checkSession();
 
             this.user_id = localStorage.getItem('userID');
+            if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
+                this.userimage = 'storage/'+localStorage.getItem('imagePath')
+            }
             this.username = localStorage.getItem('username');
             this.loggin = localStorage.getItem('loggin');
         }

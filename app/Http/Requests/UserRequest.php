@@ -52,7 +52,7 @@ class UserRequest extends FormRequest
         'email.email' => 'Type a valid email',
         'email.unique' => 'This email was already registed',
         'password.required' => 'A password is required',
-        'confPassword.same' => 'TThe confirmation password and password must match.',
+        'confPassword.same' => 'The confirmation password and password must match.',
         'photo.image' => 'The photo must be an image',
         'photo.mimes' => 'The image must be a type of JPG/JPEG, PNG or BMP',
         'photo.dimensions' => 'The image require min-width=100,max-width=700,min-height=100,max-height=700',

@@ -55,12 +55,14 @@ export default defineComponent({
         },
     data(){
         return {
-            userphoto: '',
+            userimage: '',
         }
     },
     mounted(){
-        this.userphoto = 'assets/img/team/team-1.jpg';
-
+        this.userimage = localStorage.getItem('imagePath')
+        if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
+            this.userimage = 'storage/'+localStorage.getItem('imagePath')
+        }
     }
 })
 </script>

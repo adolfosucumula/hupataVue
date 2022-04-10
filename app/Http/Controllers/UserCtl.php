@@ -56,16 +56,16 @@ class UserCtl extends Controller
             if($rs->id){
                 return response()->json(['save'=>true,'inserted'=> $rs->id,],200);
             }else{
-                Storage::delete($pathToFile);
+                Storage::disk('public')->delete($pathToFile);
                 return response()->json(['save'=>false,'inserted'=> 0,],422);
             }
         } catch (\Throwable $th) {
             //throw $th;
-            Storage::delete($pathToFile);
+            Storage::disk('public')->delete($pathToFile);
             return response()->json(['save'=>false,'error'=> $th,'imagePath'=>$pathToFile,'error_message'=> $th->getMessage(),
             'photo'=>$request->photo],422);
         }
-        Storage::delete($pathToFile);
+        Storage::disk('public')->delete($pathToFile);
     }
 
     /**

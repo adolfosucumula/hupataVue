@@ -49,7 +49,7 @@ class UserCtl extends Controller
                 'email' => $request->email,
                 'level' => $request->level,
                 'status' => $request->status,
-                'photo' => $pathToFile,
+                'photo' => $pathToFile==''? 'images/user.png' : $pathToFile,
                 'password' => Hash::make($request->password),
             ]);
 

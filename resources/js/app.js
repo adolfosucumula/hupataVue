@@ -35,6 +35,7 @@ import Jobs from './components/website/Jobs.vue';
 import JobDetails from './components/website/JobDetails.vue';
 import PostJobsForm from './components/website/PostJobsForm.vue';
 import PostedJobs from './components/website/PostedJobs.vue';
+import EditJobsForm from './components/website/EditJobsForm.vue';
 
 
 Vue.config.productionTip = false;
@@ -58,6 +59,7 @@ const routes = [
     { path: '/web/dashboard/jobs', component: Jobs  },
     { path: '/web/dashboard/job/:title/:id', component: JobDetails  },
     { path: '/web/dashboard/job/post', component: PostJobsForm  },
+    { path: '/web/dashboard/job/edit/:id/:title', component: EditJobsForm  },
     { path: '/web/dashboard/recent-jobs', component: RecentJobs   },
     { path: '/web/dashboard/saved-jobs', component: SavedJobs   },
     { path: '/web/dashboard/posted-jobs', component: PostedJobs }

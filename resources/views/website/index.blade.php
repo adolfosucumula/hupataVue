@@ -4,7 +4,7 @@
 @section("content")
 
 @if (!Auth::check())
-<section v-if="!loggin" id="topbar" class="d-flex align-items-center">
+<!--<section v-if="!loggin" id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
     <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:rocketmc2009@gmail.com">rocketmc2009@gmail.com</a></i>
@@ -16,7 +16,7 @@
         <router-link to="/webcontact/signin" class="scrollto" style="background-color: rgb(13, 46, 194)">Sign In</router-link>
     </div>
     </div>
-</section>
+</section>-->
 @endif
     <router-view> </router-view>
 
@@ -42,8 +42,10 @@
                 <li><i class="bx bx-chevron-right"></i> <router-link to="/">Home</router-link></li>
                 <li><i class="bx bx-chevron-right"></i> <router-link to="#">Search Talents</router-link></li>
                 <li><i class="bx bx-chevron-right"></i> <router-link to="/">Search Work</router-link></li>
-                <li><i class="bx bx-chevron-right"></i> <router-link to="#">Posted Projects</router-link></li>
-
+                <li><i class="bx bx-chevron-right"></i> <router-link to="/web/dashboard/job/post">Search Jobs</router-link></li>
+                <li><i class="bx bx-chevron-right"></i> <router-link to="/webcontact/signup">Sign Up </router-link></li>
+                <li><i class="bx bx-chevron-right"></i> <router-link to="/webcontact/signin">Sign In</router-link></li>
+                <li><i class="bx bx-chevron-right"></i> <router-link to="/web/user/logout">Logout</router-link></li>
                 </ul>
             </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DefaultSetting;
 use Illuminate\Http\Request;
 
 class DefaultSettingsCtl extends Controller
@@ -13,7 +14,12 @@ class DefaultSettingsCtl extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $rs = DefaultSetting::all();
+            return response()->json($rs);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
     }
 
     /**

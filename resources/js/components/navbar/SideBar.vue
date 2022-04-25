@@ -30,7 +30,8 @@
         <div class="container text-center">
           <div class="">
             <span>Profile state: </span><br />
-            <span>...........</span> <span>100 %</span>
+            <span>User percent:</span> <span>{{100 - app_taxpercent}}%</span><br />
+            <span>App tax percent: </span> <span>{{app_taxpercent}}%</span>
           </div>
           <div class="hability">
             <span>__..__</span>
@@ -38,25 +39,6 @@
         </div>
       </div>
     </div>
-    <!--<div
-      class="card"
-      style="background-color: #e4ebe4; border-radius: 0px 0px 0px 0px"
-    >
-      <div class="card-body">
-        <div class="container text-center">
-          <div class="side-nav">
-            <ul>
-              <li>
-                <a href="#" @click="clickLink('Posted')" >Posted Jobs </a>
-              </li>
-              <li>
-                <a href="#" @click="clickLink('Saved')">Saved Jobs</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>-->
     <div
       class="card"
       style="
@@ -82,26 +64,20 @@ import { defineComponent } from "@vue/composition-api";
 export default defineComponent({
     setup() {},
     props:{
-
+        username:null,
+        userimage:'images/user.png',
+        app_taxpercent:null,
     },
     data(){
         return {
-            user:null,
-            userimage:'images/user.png',
+
+
         }
     },
     methods: {
-        clickLink(v){
-            //to="/web/dashboard/posted-jobs"
-            //to="/web/dashboard/saved-jobs"
-            alert(v)
-        }
+
     },
     mounted(){
-        this.user = localStorage.getItem('username')
-        if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
-            this.userimage = 'storage/'+localStorage.getItem('imagePath')
-        }
 
     }
 });
@@ -112,9 +88,9 @@ export default defineComponent({
   --clr: #222327;
 }
 .user-photo {
-  max-width: 80px;
-  max-height: 80px;
-  border-radius: 40px;
+  max-width: 90px;
+  max-height: 90px;
+  border-radius: 45px;
 }
 .username {
   color: #70b91d;

@@ -100,7 +100,7 @@ class JobsCtl extends Controller
     public function update(JobsRequest $request, $id)
     {
         try {
-            $rs = Jobs::where('id',$id)
+            $rs = Jobs::find($id)
             ->update([
                 'title' => $request->title,
                 'detail' => $request->detail,
@@ -112,7 +112,7 @@ class JobsCtl extends Controller
                 'currency' => $request->currency,
                 'updated_at'=> date('Y-m-d H:s:i')
             ]);
-            return response()->json(['update'=>true,'inserted'=> $rs->id,],200);
+            return response()->json(['update'=>true,],200);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json(['update'=>false,'error'=> $th,'error_message'=> $th->getMessage()],422);
@@ -128,7 +128,8 @@ class JobsCtl extends Controller
     public function destroy($id)
     {
         try {
-            Jobs::deleted($id);
+            Jobs::destroy($id);
+            return response()->json(['deleted'=>true,'job'=> $id]);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json($th->getMessage());

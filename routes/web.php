@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\CategoryKnowledgeCtl;
+use App\Http\Controllers\CustomerBidsCtl;
 use App\Http\Controllers\JobsCtl;
 use App\Http\Controllers\LoginCtl;
 use App\Http\Controllers\SubcategoryKnowledgeCtl;
 use App\Http\Controllers\UserCtl;
 use App\Http\Controllers\WebContactCtl;
 use App\Http\Controllers\WebMessageCtl;
+use App\Models\CustomerBids;
 use App\Models\WebMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,3 +46,5 @@ Route::resource('/category-knowledges', CategoryKnowledgeCtl::class);
 Route::post('/category-knowledges/select', [CategoryKnowledgeCtl::class, 'search']);
 Route::resource('/sub-category-knowledges', SubcategoryKnowledgeCtl::class);
 Route::post('/sub-category-knowledges/select', [SubcategoryKnowledgeCtl::class, 'search']);
+Route::resource('/job-bids', CustomerBidsCtl::class);
+Route::get('/job-bids/get/{id}', [CustomerBidsCtl::class, 'getJobBids']);

@@ -17,7 +17,7 @@
     </div>
     <div class="card sidebar-rigth">
       <div class="card-header">
-        <span class="card-title">Jobs you might like</span>
+        <span class="card-title">Jobs you had posted</span>
       </div>
     </div>
     <div v-for="item in jobs" :key="item.id" class="card sidebar-rigth">
@@ -55,6 +55,22 @@
             <span class="certificate">{{ item.preferences }}</span>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-11 bid">
+            <button
+              v-if="!bid"
+              @click="editJob(item.id, item.title)"
+              class="btn btn-primary btn-sm"
+            >
+              <i class="fas fa-edit"></i>
+              Edit
+            </button>
+            <button @click="deleteJob(item.id)" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash"></i>
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -90,92 +106,131 @@ export default {
           console.log(error);
         });
     },
-    async searchJobs(){
-                if(this.search){
-                    await axios.post('/select/jobs',{search: this.search })
-                    .then((res) => {
-                        if(res.status == 200){
-                            if(res.data.length > 0){
-                                this.jobs = res.data;
-                            }
-                        }else{
-                            console.log(res.data)
-                        }
-                    })
-                    .catch((error) =>{
-                        console.log(error);
-                    });
-                }else{
-                    this.getAllJobs();
-                }
-            },
+    editJob(id, title) {
+      const myArray = title.split(" ");
+      let i = 0;
+      let newTitle = "";
+
+      for (i = 0; i < myArray.length; i++) {
+        if (i == 0) {
+          newTitle = myArray[i];
+        } else {
+          newTitle = newTitle + "-" + myArray[i];
+        }
+      }
+      this.$router.push(
+        "/web/dashboard/job/edit/" + id + "/" + newTitle.toLowerCase()
+      );
+    },
+    async deleteJob(id) {
+      if (id) {
+        await axios.delete("/jobs/" + id)
+          .then((res) => {
+            if (res.status != 200) {
+              console.log(res);
+            } else { console.log(res);
+              this.getPostedJobs();
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+      }
+    },
+    async searchJobs() {
+      if (this.search) {
+        await axios
+          .post("/select/jobs", { search: this.search })
+          .then((res) => {
+            if (res.status == 200) {
+              if (res.data.length > 0) {
+                this.jobs = res.data;
+              }
+            } else {
+              console.log(res.data);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+      }
+    },
   },
   mounted() {
     this.getPostedJobs();
-    //alert(localStorage.getItem('userID'))
   },
 };
 </script>
 
 <style scoped>
-    .widegets{
-        text-align: right;
-    }
-    .job-title{ cursor: pointer; color: rgb(48, 136, 7); }
-    .job-title:hover{color: #0A2A50;}
-    .certificate{ color: rgb(122, 122, 121); font-size: 11pt;}
-    .user-photo{
-        max-width: 80px;
-        max-height: 80px;
-        border-radius: 40px;
-    }
-    .name{
-        text-decoration: underline;
-    }
-
-    .blog .sideba {
-    padding: 0px;
-    margin: 0 0 60px 20px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-    .blog .form {
-    padding: 0px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-    .tab{
-        background-color: #012a50;
-        border-bottom: 0px;
-    }
-
-.sidebar-rigth{
-    border-radius: 0px 0px 0px 0px;
+.widegets {
+  text-align: right;
+}
+.job-title {
+  cursor: pointer;
+  color: rgb(48, 136, 7);
+}
+.job-title:hover {
+  color: #0a2a50;
+}
+.certificate {
+  color: rgb(122, 122, 121);
+  font-size: 11pt;
+}
+.user-photo {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 40px;
+}
+.name {
+  text-decoration: underline;
 }
 
-.card-title{
-    font-weight: bold;
-    font-size: 1.3em;
-    color: #fff;
+.blog .sideba {
+  padding: 0px;
+  margin: 0 0 60px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
-.card-header{
-    padding: 4px;
-    background-color: #012a50;
-    border-bottom: 0px;
+.blog .form {
+  padding: 0px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
-.menu{
-    position: absolute;
-    display: block;
-    margin-top: 1%;
-    background: #012a50;
+.tab {
+  background-color: #012a50;
+  border-bottom: 0px;
 }
 
-.menu .title{
-    padding: 0%;
-    margin-left: 0%;
-    text-decoration: none;
-    color: #ddd;
+.sidebar-rigth {
+  border-radius: 0px 0px 0px 0px;
 }
-.menu-job{
-    background-color: #012a50;
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #fff;
+}
+.card-header {
+  padding: 4px;
+  background-color: #012a50;
+  border-bottom: 0px;
+}
+.menu {
+  position: absolute;
+  display: block;
+  margin-top: 1%;
+  background: #012a50;
+}
+
+.menu .title {
+  padding: 0%;
+  margin-left: 0%;
+  text-decoration: none;
+  color: #ddd;
+}
+.menu-job {
+  background-color: #012a50;
 }
 .blog .sideba .sidebar-title {
   font-size: 20px;
@@ -204,13 +259,13 @@ form {
   padding: 3px 10px;
   position: relative;
 }
-.blog .sideba .search-form form input[type=text] {
+.blog .sideba .search-form form input[type="text"] {
   border: 0;
   padding: 4px;
   border-radius: 4px;
   width: calc(100% - 40px);
 }
-form input[type=text] {
+form input[type="text"] {
   border: 0;
   padding: 4px;
   border-radius: 4px;
@@ -262,58 +317,55 @@ form input[type=text] {
   background: #35ff72;
 }
 .search-form form button i:hover {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
-nav{
-    position: relative;
+nav {
+  position: relative;
   padding-bottom: 12px;
 }
-.line
-    {
-        height: 2px;
-        position: absolute;
-        bottom: 0;
-        margin: 10px 0 0 0;
-        background: #FF1847;
-    }
+.line {
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  margin: 10px 0 0 0;
+  background: #ff1847;
+}
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
 
-  ul{
-      padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-  }
+li {
+  margin: 0 40px 0 0;
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
 
-    li{
-        margin: 0 40px 0 0;
-      opacity: .4;
-      transition: all 0.4s ease;
-    }
+li:hover {
+  opacity: 0.7;
+}
 
-      li:hover{
-          opacity: .7;
-      }
+li .active {
+  opacity: 1;
+}
 
-      li .active{
-          opacity: 1
-      }
+li:last-child {
+  margin-right: 0;
+}
 
-      li:last-child{
-          margin-right: 0;
-      }
-
-      a{
-          text-decoration: none;
-        color: #fff;
-        text-transform: uppercase;
-        display: block;
-        font-weight: 600;
-        letter-spacing: .2em;
-        font-size: 14px;
-      }
-
+a {
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-size: 14px;
+}
 </style>
 
 

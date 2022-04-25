@@ -20,8 +20,8 @@ class CreateJobsTable extends Migration
             $table->string('title');
             $table->text('detail');
             $table->string('requirements');
-            $table->decimal('tax_per_hour',10,2);
-            $table->decimal('total_tax',10,2);
+            $table->double('tax_per_hour',10,2);
+            $table->double('total_tax',10,2);
             $table->string('time_required');
             $table->string('preferences')->nullable();
             $table->string('currency');

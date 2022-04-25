@@ -44,7 +44,7 @@ class JobsRequest extends FormRequest
     {
         return [
         'title.required' => 'This field is required',
-        'title.max' => 'This field require max 1 character',
+        'title.max' => 'This field require max 1 characters',
         ];
     }
 

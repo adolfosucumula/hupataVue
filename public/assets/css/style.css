@@ -2084,3 +2084,7 @@ section {
           transform: translateX(calc(150px * 3));
           left: -3%;
       }
+
+      .bid{
+        text-align: right;
+    }

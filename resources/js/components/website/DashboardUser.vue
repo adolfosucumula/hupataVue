@@ -1,9 +1,10 @@
 
 <template>
     <body>
-        <Header :username="username" :loggin="loggin" />
+       <!-- <NavbarTop />-->
+        <Header :username="username" :userimage="userphoto" :loggin="loggin" />
 
-        <main id="main" style="background-color: #F1F2F4">
+        <main id="main" style="background-color: #F1F2F4;margin-top:5%">
 
             <!-- ======= Blog Section ======= -->
             <section id="blog" class="blog">
@@ -11,24 +12,14 @@
 
                 <div class="row">
 
-                    <SideBar />
+                    <SideBar :username="username" :userimage="userphoto" :app_taxpercent="app_tax_percent" />
 
                     <div class="col-lg-8 entries">
 
                         <slot class="dasboard-slot-pages">
-                            <div class="form">
-                                <div class="sidebar-item search-form " >
-                                    <form v-on:submit.prevent="search()" method="post">
-                                        <input type="text" v-model="search" placeholder="Search for job" class="form-control">
-                                        <button type="submit"><i class="bi bi-search"></i></button>
-                                    </form>
-                                </div><!-- End sidebar search formn-->
-                            </div>
 
                             <div class="card sidebar-rigth">
-                                <div class="card-header">
-                                    <span class="card-title">Jobs you might like</span>
-                                </div>
+
                                 <div class="card-body menu-job">
                                     <div class="navigation">
                                         <ul>
@@ -81,6 +72,7 @@
 
 <script>
 
+    import NavbarTop from '../navbar/NavBarTop.vue'
     import Header from '../navbar/Header.vue';
     import SideBar from '../navbar/SideBar.vue';
     import SavedJobs from '../website/SavedJobs.vue';
@@ -97,31 +89,23 @@
             SideBar,
             SavedJobs,
             PostedJobs,
+            NavbarTop,
         },
         data(){
             return {
                 user_id:null,
-                userimage:'images/user.png',
+                userphoto:'images/user.png',
                 search: null,
                 showLoader:false,
                 loggin: false,
                 result:[],
                 color:'',
-                tabIndex: 0,
+                app_tax_percent: '',
                 showComponent:'posted'
             }
         },
         methods: {
-            async search(){
 
-            },
-            linkClass(idx) {
-                if (this.tabIndex === idx) {
-                return ['bg-primary', 'text-light']
-                } else {
-                return ['bg-light', 'text-info']
-                }
-            },
             checkSession(){
                 axios.get('/check/user-session')
                     .then((res) => {
@@ -168,8 +152,10 @@
             this.checkSession();
 
             this.user_id = localStorage.getItem('userID');
-            if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
-                this.userimage = 'storage/'+localStorage.getItem('imagePath')
+            this.app_tax_percent = localStorage.getItem('app_tax_percent');
+            this.userphoto = 'storage/'+localStorage.getItem('imagePath');
+            if(localStorage.getItem('imagePath')==''|localStorage.getItem('imagePath')==null|localStorage.getItem('imagePath')=='null'){
+                this.userphoto = 'images/user.png'
             }
             this.username = localStorage.getItem('username');
             this.loggin = localStorage.getItem('loggin');

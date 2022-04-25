@@ -1,6 +1,20 @@
 
 <template>
-    <header id="header" class="d-flex align-items-center" style="background-color: 1D4354">
+    <session>
+        <section v-if="!loggin" id="topbar" class="d-flex align-items-center">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:rocketmc2009@gmail.com">rocketmc2009@gmail.com</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+244 939 000 287</span></i>
+            </div>
+
+            <div class="cta d-none d-md-flex align-items-center">
+                <router-link v-if="!loggin" to="/webcontact/signup" class="scrollto">Sign Up </router-link>
+                <router-link v-if="!loggin" to="/webcontact/signin" class="scrollto" style="background-color: rgb(13, 46, 194)">Sign In</router-link>
+            </div>
+            </div>
+        </section>
+        <header id="header" class="d-flex align-items-center" style="background-color: 1D4354">
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
@@ -28,11 +42,11 @@
                     <li v-if="!loggin"><router-link class="nav-link scrollto" to="/webcontact/form" > Contacts </router-link></li>
                     <li v-if="loggin"><router-link class="nav-link scrollto" to="" > Message </router-link></li>
                     <li v-if="loggin" class="dropdown ">
-                        <a href="javascript:;" class="nav-link"><img class="user-photo" src="assets/img/team/team-1.jpg" alt="" ></a>
+                        <a href="javascript:;" class="nav-link"><img class="user-photo" :src="userimage" alt="user" ></a>
                         <ul>
                             <li><a href="#" style="color: #555;">{{username}}</a></li>
                             <li v-if="loggin"><router-link class="nav-link  sublink" to="/web/user/logout" >
-                                <i class="fa fa-power-off text-danger"></i> <span id="logout">Logout</span> </router-link>
+                                <!--<i class="fa fa-power-off text-danger"></i>--> <span id="logout">Logout</span> </router-link>
                             </li>
                         </ul>
                     </li>
@@ -41,6 +55,7 @@
                 </nav><!-- .navbar -->
             </div>
         </header>
+    </session>
 </template>
 <script>
 import { defineComponent } from '@vue/composition-api'
@@ -51,18 +66,19 @@ export default defineComponent({
     },
     props:  {
             username: '',
+            userimage:'images/user.png',
             loggin: false,
         },
     data(){
         return {
-            userimage: '',
+
         }
     },
+    methods: {
+
+    },
     mounted(){
-        this.userimage = localStorage.getItem('imagePath')
-        if(localStorage.getItem('imagePath')!='' & localStorage.getItem('imagePath')!=null){
-            this.userimage = 'storage/'+localStorage.getItem('imagePath')
-        }
+
     }
 })
 </script>
